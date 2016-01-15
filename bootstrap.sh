@@ -60,10 +60,10 @@ chmod 664 /var/log/st2/st2api.log # [inline]
 touch /var/log/st2/st2api.audit.log # [inline]
 chown st2:st2 /var/log/st2/st2api.audit.log # [inline]
 chmod 664 /var/log/st2/st2api.audit.log # [inline]
-chown -R st2:st2 /opt/stackstorm/packs # [inline]
-chmod -R 664 /opt/stackstorm/packs # [inline]
 /usr/share/python/st2/bin/python /usr/share/python/st2/bin/gunicorn_pecan /usr/share/python/st2/lib/python2.7/site-packages/st2api/gunicorn_config.py -k eventlet -b unix:/var/sockets/st2api.sock --threads 10 --workers 1 -u www-data -g st2 -D # [inline]
 /usr/share/python/st2/bin/uwsgi --ini /etc/uwsgi.d/st2auth.ini -d /var/log/st2/st2auth.uwsgi.log # [inline]
 st2ctl start
 service st2api stop
+chown -R st2:st2 /opt/stackstorm/packs # [inline]
+chmod -R 775 /opt/stackstorm/packs # [inline]
 wait
