@@ -34,6 +34,7 @@ yum install -y st2python st2bundle st2web mistral st2mistral
 
 # Copy Nginx config
 mkdir -p /etc/nginx/conf.d/
+rm /etc/nginx/conf.d/default.conf
 cp /vagrant/conf/nginx/st2.conf /etc/nginx/conf.d/
 
 # Set up SSL certs
@@ -48,12 +49,12 @@ yum install -y httpd-tools
 htpasswd -bcs /etc/st2/htpasswd admin 123
 
 # Open ports on firewall
-sudo firewall-cmd --permanent --zone=public --add-service=http
-sudo firewall-cmd --permanent --zone=public --add-service=https
-sudo firewall-cmd --reload
+iptables -I INPUT -p tcp -m tcp --dport 80 -j ACCEPT
+iptables -I INPUT -p tcp -m tcp --dport 443 -j ACCEPT
+service iptables save
 
 # Init postgres
-postgresql-setup initdb
+service postgresql initdb
 
 pg_hba_config=/var/lib/pgsql/data/pg_hba.conf
 sed -i 's/^local\s\+all\s\+all\s\+peer/local all all trust/g' ${pg_hba_config}
