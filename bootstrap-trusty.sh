@@ -17,15 +17,13 @@ apt-get update
 apt-get install -y st2bundle st2web mistral st2mistral
 
 # Copy Nginx config
+rm /etc/nginx/sites-enabled/default
 cp /vagrant/conf/nginx/st2.conf /etc/nginx/sites-available/
 ln -s /etc/nginx/sites-available/st2.conf /etc/nginx/sites-enabled/st2.conf
 
 # Set up SSL certs
 mkdir -p /etc/ssl/st2
 openssl req -x509 -newkey rsa:2048 -keyout /etc/ssl/st2/st2.key -out /etc/ssl/st2/st2.crt -days XXX -nodes -subj "/C=US/ST=California/L=Palo Alto/O=StackStorm/OU=Information Technology/CN=$(hostname)"
-
-# Copy st2web config
-cp /vagrant/conf/st2web/config.js /opt/stackstorm/static/webui/
 
 # Setup auth user
 apt-get install -y apache2-utils

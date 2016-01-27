@@ -41,9 +41,6 @@ cp /vagrant/conf/nginx/st2.conf /etc/nginx/conf.d/
 mkdir -p /etc/ssl/st2
 openssl req -x509 -newkey rsa:2048 -keyout /etc/ssl/st2/st2.key -out /etc/ssl/st2/st2.crt -days XXX -nodes -subj "/C=US/ST=California/L=Palo Alto/O=StackStorm/OU=Information Technology/CN=$(hostname)"
 
-# Copy st2web config
-cp /vagrant/conf/st2web/config.js /opt/stackstorm/static/webui/
-
 # Setup auth user
 yum install -y httpd-tools
 htpasswd -bcs /etc/st2/htpasswd admin 123
