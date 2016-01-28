@@ -17,27 +17,24 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       u14.vm.box = 'puppetlabs/ubuntu-14.04-64-nocm'
       u14.vm.provision "shell", inline: "cat /vagrant/bootstrap-trusty.sh | sudo su"
       u14.vm.provision "shell", inline: "cat /vagrant/banner", keep_color: true
-      name = "#{hostname}-u14"
+      u14.vm.hostname = "#{hostname}-u14"
     end
 
     config.vm.define "el6" do |el6|
       el6.vm.box = 'puppetlabs/centos-6.6-64-nocm'
       el6.vm.provision "shell", inline: "cat /vagrant/bootstrap-el6.sh | sudo su"
       el6.vm.provision "shell", inline: "cat /vagrant/banner", keep_color: true
-      name = "#{hostname}-el6"
+      el6.vm.hostname = "#{hostname}-el6"
     end
 
     config.vm.define "el7" do |el7|
       el7.vm.box = 'puppetlabs/centos-7.0-64-nocm'
       el7.vm.provision "shell", inline: "cat /vagrant/bootstrap-el7.sh | sudo su"
       el7.vm.provision "shell", inline: "cat /vagrant/banner", keep_color: true
-      name = "#{hostname}-el7"
+      el7.vm.hostname = "#{hostname}-el7"
     end
 
-    config.vm.hostname = name
-
     config.vm.provider :virtualbox do |vb|
-      vb.name = "#{name}"
       vb.memory = 2048
       vb.cpus = 2
     end

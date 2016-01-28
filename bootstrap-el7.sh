@@ -80,6 +80,9 @@ max_pool_size = 50
 auth_enable = false
 EOF
 
+/usr/share/python/mistral/bin/mistral-db-manage --config-file /etc/mistral/mistral.conf upgrade head
+/usr/share/python/mistral/bin/mistral-db-manage --config-file /etc/mistral/mistral.conf populate
+
 # Start st2
 st2ctl start
 
@@ -89,8 +92,6 @@ cp -R /tmp/st2/contrib/examples /opt/stackstorm/packs
 
 # Register content
 st2-register-content --config-file=/etc/st2/st2.conf --register-all
-/usr/share/python/mistral/bin/mistral-db-manage --config-file /etc/mistral/mistral.conf upgrade head
-/usr/share/python/mistral/bin/mistral-db-manage --config-file /etc/mistral/mistral.conf populate
 
 echo 'IPs:'
 ifconfig -a | grep inet | grep -v inet6 | awk '{print $2}'
