@@ -33,6 +33,7 @@ EOL
 yum install -y st2bundle st2web mistral st2mistral
 
 # Copy Nginx config
+sed -i.bak '/ default_server/d' /etc/nginx/nginx.conf
 mkdir -p /etc/nginx/conf.d/
 cp /vagrant/conf/nginx/st2.conf /etc/nginx/conf.d/
 
