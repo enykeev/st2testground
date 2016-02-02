@@ -48,8 +48,8 @@ max_pool_size = 50
 auth_enable = false
 EOF
 
-/usr/share/python/mistral/bin/mistral-db-manage --config-file /etc/mistral/mistral.conf upgrade head
-/usr/share/python/mistral/bin/mistral-db-manage --config-file /etc/mistral/mistral.conf populate
+/opt/stackstorm/mistral/bin/mistral-db-manage --config-file /etc/mistral/mistral.conf upgrade head
+/opt/stackstorm/mistral/bin/mistral-db-manage --config-file /etc/mistral/mistral.conf populate
 
 # Start st2
 st2ctl start
