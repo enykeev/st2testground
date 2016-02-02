@@ -6,10 +6,10 @@ sudo su
 yum install -y epel-release
 
 # Install dependencies
-cat >/etc/yum.repos.d/mongodb-org-3.2.repo <<EOL
-[mongodb-org-3.2]
+cat >/etc/yum.repos.d/mongodb-org-2.4.repo <<EOL
+[mongodb-org-2.4]
 name=MongoDB Repository
-baseurl=https://repo.mongodb.org/yum/redhat/6/mongodb-org/3.2/x86_64/
+baseurl=http://downloads-distro.mongodb.org/repo/redhat/os/x86_64/
 gpgcheck=0
 enabled=1
 EOL
